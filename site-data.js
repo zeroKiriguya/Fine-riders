@@ -70,6 +70,7 @@ window.FINE_DEFAULT_DATA = {
   },
   orders: {
     email: "",
+    endpoint: "",
     subjectPrefix: "F.I.N.E Riders merch order",
     confirmationSubject: "Your F.I.N.E Riders order",
   },

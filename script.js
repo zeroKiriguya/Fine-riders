@@ -66,6 +66,7 @@ const defaultData = window.FINE_DEFAULT_DATA || {
   },
   orders: {
     email: "",
+    endpoint: "",
     subjectPrefix: "F.I.N.E Riders merch order",
     confirmationSubject: "Your F.I.N.E Riders order",
   },
@@ -130,6 +131,7 @@ function normalizeSiteData(data) {
 
   data.orders = {
     email: "",
+    endpoint: "",
     subjectPrefix: "F.I.N.E Riders merch order",
     confirmationSubject: "Your F.I.N.E Riders order",
     ...(data.orders || {}),
@@ -928,7 +930,7 @@ function setOrderLinkState(link, href, isEnabled) {
   link.setAttribute("aria-disabled", "true");
 }
 
-function updateOrderActions(order) {
+function updateOrderActions(order, deliveryResult = { mode: "manual" }) {
   const orderEmail = String(siteData.orders?.email || "").trim();
   const orderSubject = `${siteData.orders?.subjectPrefix || "F.I.N.E Riders merch order"} ${order.id}`;
   const orderBody = buildOrderEmailBody(order);
@@ -946,6 +948,10 @@ function updateOrderActions(order) {
     Boolean(orderEmail)
   );
 
+  if (orderSend) {
+    orderSend.textContent = deliveryResult.mode === "automatic" ? "Send backup order email" : "Send order email";
+  }
+
   setOrderLinkState(
     orderCustomerCopy,
     buildMailLink({
@@ -961,17 +967,57 @@ function updateOrderActions(order) {
   }
 
   if (orderCopyStatus) {
+    if (deliveryResult.mode === "automatic" && deliveryResult.ok) {
+      orderCopyStatus.textContent = "Order email has been submitted automatically. The buttons below are backups.";
+      return;
+    }
+
+    if (deliveryResult.mode === "automatic" && !deliveryResult.ok) {
+      orderCopyStatus.textContent = "Automatic order email could not be sent. Use the backup email button or copy the order details.";
+      return;
+    }
+
     orderCopyStatus.textContent = orderEmail
       ? "Tap send order email so the group receives it. Your email is copied in."
-      : "Order inbox is not set yet. Add it in the Kunarmi editor, then publish site data.";
+      : "Order inbox is not set yet. Add an inbox email or automatic endpoint in site-data.js.";
   }
 }
 
-function placeOrder(form) {
+async function sendOrderAutomatically(order) {
+  const endpoint = String(siteData.orders?.endpoint || "").trim();
+
+  if (!endpoint) {
+    return { mode: "manual" };
+  }
+
+  try {
+    await fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify({
+        order,
+        source: "fine-riders-site",
+        sentAt: new Date().toISOString(),
+      }),
+    });
+
+    return { mode: "automatic", ok: true };
+  } catch (error) {
+    return { mode: "automatic", ok: false, error: error.message };
+  }
+}
+
+async function placeOrder(form) {
   if (cart.length === 0) {
     showCartStep("cart");
     return;
   }
+
+  const submitButton = form.querySelector("button[type='submit']");
+  submitButton.disabled = true;
 
   const formData = new FormData(form);
   const order = {
@@ -994,10 +1040,13 @@ function placeOrder(form) {
 
   localStorage.setItem(ORDER_KEY, JSON.stringify(order));
   orderMessage.textContent = `${order.id} is ready for ${order.customerName}. Total ${formatMoney(order.total)}. Payment is set to ${getPaymentLabel(order.payment)}.`;
-  updateOrderActions(order);
+
+  const deliveryResult = await sendOrderAutomatically(order);
+  updateOrderActions(order, deliveryResult);
 
   cart = [];
   form.reset();
+  submitButton.disabled = false;
   updateShippingFields();
   renderCart();
 
@@ -1195,9 +1244,9 @@ checkoutForm.querySelectorAll("input[name='delivery']").forEach((input) => {
   input.addEventListener("change", updateShippingFields);
 });
 
-checkoutForm.addEventListener("submit", (event) => {
+checkoutForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  placeOrder(checkoutForm);
+  await placeOrder(checkoutForm);
 });
 
 [orderSend, orderCustomerCopy].forEach((link) => {
