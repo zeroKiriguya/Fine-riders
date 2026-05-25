@@ -8,12 +8,13 @@ GitHub Pages cannot send emails by itself. Use this small Google Apps Script end
 2. Create a new project.
 3. Replace the starter code with the contents of `order-email-apps-script.gs`.
 4. Change `ORDER_INBOX` at the top of the script to your real order inbox.
-5. Click **Deploy** > **New deployment**.
-6. Choose **Web app**.
-7. Set **Execute as** to **Me**.
-8. Set **Who has access** to **Anyone**.
-9. Authorise the script when Google asks.
-10. Copy the Web app URL ending in `/exec`.
+5. Check `SITE_URL` points to a public image folder. It is currently set to the raw GitHub repo files, which works when the repo is public and pushed.
+6. Click **Deploy** > **New deployment**.
+7. Choose **Web app**.
+8. Set **Execute as** to **Me**.
+9. Set **Who has access** to **Anyone**.
+10. Authorise the script when Google asks.
+11. Copy the Web app URL ending in `/exec`.
 
 ## 2. Test the endpoint
 
@@ -52,4 +53,5 @@ Then commit and push the site.
 
 - If `endpoint` is blank, checkout still works with the manual email button.
 - If `endpoint` is set, checkout submits the order automatically and keeps the buttons as backups.
+- The branded email uses remote images. Some email apps hide images until the reader taps "show images".
 - Google Apps Script email sending has daily quota limits, so check your quota if orders ever stop sending.
