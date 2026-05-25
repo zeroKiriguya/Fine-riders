@@ -1,4 +1,4 @@
-const ORDER_INBOX = "YOUR_EMAIL_HERE@example.com";
+const ORDER_INBOX = "zero.tipping@gmail.com";
 const BRAND_NAME = "F.I.N.E Riders";
 const SUBJECT_PREFIX = "F.I.N.E Riders merch order";
 const CUSTOMER_SUBJECT = "Your F.I.N.E Riders order";
