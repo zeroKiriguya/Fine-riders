@@ -69,7 +69,7 @@ window.FINE_DEFAULT_DATA = {
     shippingPrice: 4.99,
   },
   orders: {
-    email: "",
+    email: "fineriderstt@gmail.com",
     endpoint: "https://script.google.com/macros/s/AKfycby6eZCOOMWMAVrxNOsFR6YZDhn0plD7ICx_-0c2ZtiycDMYieszpd-9-wz5Rzw6YfA/exec",
     subjectPrefix: "F.I.N.E Riders merch order",
     confirmationSubject: "Your F.I.N.E Riders order",
