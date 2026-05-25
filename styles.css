@@ -1,6 +1,6 @@
 @font-face {
   font-family: "FineDisplay";
-  src: url("assets/fonts/fine.otf") format("opentype");
+  src: url("fine.otf") format("opentype");
   font-display: swap;
 }
 
