@@ -28,11 +28,7 @@ function doGet() {
 
 function doPost(event) {
   try {
-    const rawPayload =
-      (event.parameter && event.parameter.payload) ||
-      (event.postData && event.postData.contents) ||
-      "{}";
-    const payload = JSON.parse(rawPayload);
+    const payload = parsePayload(event);
     const order = payload.order || payload;
     validateOrder(order);
 
@@ -74,6 +70,45 @@ function doPost(event) {
       error: String(error && error.message ? error.message : error),
     });
   }
+}
+
+function parsePayload(event) {
+  const parameterPayload = event && event.parameter && event.parameter.payload;
+
+  if (parameterPayload) {
+    return JSON.parse(parameterPayload);
+  }
+
+  const postData = event && event.postData ? event.postData : {};
+  const rawBody = postData.contents || "{}";
+  const contentType = String(postData.type || "").toLowerCase();
+
+  if (contentType.indexOf("application/x-www-form-urlencoded") !== -1 || rawBody.indexOf("payload=") === 0) {
+    const formFields = parseFormBody(rawBody);
+    return JSON.parse(formFields.payload || "{}");
+  }
+
+  return JSON.parse(rawBody);
+}
+
+function parseFormBody(rawBody) {
+  return String(rawBody || "")
+    .split("&")
+    .reduce(function (fields, pair) {
+      if (!pair) {
+        return fields;
+      }
+
+      const parts = pair.split("=");
+      const key = decodeFormValue(parts.shift() || "");
+      const value = decodeFormValue(parts.join("="));
+      fields[key] = value;
+      return fields;
+    }, {});
+}
+
+function decodeFormValue(value) {
+  return decodeURIComponent(String(value || "").replace(/\+/g, " "));
 }
 
 function validateOrder(order) {
