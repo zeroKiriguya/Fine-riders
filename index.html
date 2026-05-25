@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>F.I.N.E Riders</title>
+    <meta
+      name="description"
+      content="F.I.N.E Riders merch, local rideout updates, and bike group events."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="F.I.N.E Riders home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/brand/fine-crest.jpg" alt="">
+        </span>
+        <span>F.I.N.E Riders</span>
+      </a>
+
+      <div class="header-actions">
+        <button class="cart-button" type="button" data-cart-open aria-expanded="false" aria-controls="cart-drawer">
+          <span>Cart</span>
+          <strong id="cart-count">0</strong>
+        </button>
+
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span class="sr-only">Menu</span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="#shop">Merch</a>
+        <a href="#prep">Ride Prep</a>
+        <a href="#events">Events</a>
+        <a href="#rideouts">Rideouts</a>
+        <a href="#join">Join</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <img
+          class="hero-bike"
+          src="assets/fine-riders-hero.png"
+          alt="Motorbike riders gathered under purple cyberpunk city lights"
+        >
+        <img
+          class="hero-crest"
+          src="assets/brand/fine-crest.jpg"
+          alt="F.I.N.E Riders cyberpunk crest"
+        >
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <canvas class="hero-neon-field" id="hero-neon-field" aria-hidden="true"></canvas>
+        <div class="hero-hud" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Home of the Ruroc Army</p>
+          <h1>
+            <span>F.I.N.E</span>
+            <span>Riders</span>
+          </h1>
+          <p class="hero-tagline">Ride together. <span>Rep forever.</span></p>
+          <p class="hero-lede">
+            Fucked Inside Not Empty. A rider movement for the ones who turn up,
+            stand out, and carry the purple mark.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#shop">Shop merch</a>
+            <a class="button secondary" href="#events">Next events</a>
+          </div>
+        </div>
+
+        <div class="signal-strip" aria-label="Current group highlights">
+          <div>
+            <strong>FR</strong>
+            <span>drip mark live</span>
+          </div>
+          <div>
+            <strong>Rep</strong>
+            <span>hoodies and flight tags</span>
+          </div>
+          <div>
+            <strong>Ride</strong>
+            <span>local updates</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="Latest announcement">
+        <p>Ride together. Rep forever. Summer merch and rideout updates landing soon.</p>
+      </section>
+
+      <section class="section brand-story" id="story">
+        <div class="story-mark" aria-hidden="true">
+          <img src="assets/brand/fr-drip-mark-transparent.png" alt="">
+        </div>
+        <div>
+          <p class="eyebrow">About the brand</p>
+          <h2>Fucked Inside Not Empty.</h2>
+          <p>
+            F.I.N.E Riders is more than a group. It is a mindset: ride together,
+            rep hard, and stand out everywhere the crew goes.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="shop">
+        <div class="section-heading">
+          <p class="eyebrow">Merch</p>
+          <h2>Built around the mark.</h2>
+        </div>
+
+        <div class="merch-feature">
+          <img
+            src="assets/brand/hoodie-board.png"
+            alt="F.I.N.E Riders hoodie design board showing front, back, sleeve details, colors, and sizes"
+          >
+          <div class="merch-copy">
+            <p class="eyebrow">Signature drop</p>
+            <h3>F.I.N.E Riders Hoodie</h3>
+            <p>
+              Black heavyweight hoodie with purple FR graphics, sleeve branding,
+              relaxed fit, and color options matching the crew identity.
+            </p>
+            <span class="price">&pound;35</span>
+            <div class="size-row" aria-label="Available sizes">
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+              <span>2XL</span>
+              <span>3XL</span>
+            </div>
+            <form class="product-form" data-product-form data-product-id="hoodie-signature" data-product-name="F.I.N.E Riders Hoodie" data-product-price="35">
+              <div class="product-controls">
+                <label>
+                  <span>Colour</span>
+                  <select name="colour">
+                    <option value="Black / Purple">Black / Purple</option>
+                    <option value="Purple / White">Purple / White</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Size</span>
+                  <select name="size">
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>2XL</option>
+                    <option>3XL</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Qty</span>
+                  <input name="quantity" type="number" min="1" max="10" value="1">
+                </label>
+              </div>
+              <button class="button primary product-button" type="submit">Add hoodie</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="merch-grid">
+          <article class="product-tile flight-tag-tile">
+            <p>Accessories</p>
+            <h3>Bike Flight Tags</h3>
+            <span class="price">&pound;8</span>
+            <form class="product-form compact" data-product-form data-product-id="bike-flight-tags" data-product-name="Bike Flight Tags" data-product-price="8">
+              <div class="product-controls">
+                <label>
+                  <span>Qty</span>
+                  <input name="quantity" type="number" min="1" max="10" value="1">
+                </label>
+              </div>
+              <input type="hidden" name="colour" value="Purple FR">
+              <input type="hidden" name="size" value="Tag">
+              <button class="button product-button" type="submit">Add tags</button>
+            </form>
+          </article>
+        </div>
+
+        <p class="cart-status" id="cart-status" role="status" aria-live="polite">
+          Cart is ready for your first item.
+        </p>
+      </section>
+
+      <section class="section prep-section" id="prep">
+        <div class="section-heading">
+          <p class="eyebrow">Ride prep</p>
+          <h2>Check the conditions before rollout.</h2>
+        </div>
+
+        <div class="prep-dashboard">
+          <article class="prep-live-card">
+            <div>
+              <p class="eyebrow">Live conditions</p>
+              <h3 id="prep-condition">Ready when you are.</h3>
+              <p id="prep-location-label">
+                Defaulting to Colchester, UK. Use your location if you are meeting somewhere else.
+              </p>
+            </div>
+            <button class="button primary" type="button" id="ride-prep-location">
+              Use my location
+            </button>
+            <p class="prep-status" id="prep-status" role="status" aria-live="polite">
+              Weather source: Open-Meteo. Always check conditions again before setting off.
+            </p>
+          </article>
+
+          <div class="prep-metrics" aria-label="Ride condition metrics">
+            <article>
+              <span>Temp</span>
+              <strong id="prep-temp">--</strong>
+              <p id="prep-feels">Feels like --</p>
+            </article>
+            <article>
+              <span>Wind</span>
+              <strong id="prep-wind">--</strong>
+              <p id="prep-gusts">Gusts --</p>
+            </article>
+            <article>
+              <span>Rain</span>
+              <strong id="prep-rain">--</strong>
+              <p id="prep-precip">Chance --</p>
+            </article>
+            <article>
+              <span>Visibility</span>
+              <strong id="prep-visibility">--</strong>
+              <p id="prep-updated">Not updated yet</p>
+            </article>
+          </div>
+
+          <article class="prep-traffic-card">
+            <p class="eyebrow">Traffic</p>
+            <h3>Check the roads before the meet.</h3>
+            <div class="prep-links">
+              <a class="button secondary" href="https://www.google.com/maps" target="_blank" rel="noreferrer">Open Google Maps</a>
+              <a class="button secondary" href="https://www.waze.com/live-map" target="_blank" rel="noreferrer">Open Waze</a>
+            </div>
+          </article>
+
+          <article class="prep-checklist">
+            <p class="eyebrow">Quick check</p>
+            <ul>
+              <li>Fuel, tyre pressure, visor, gloves.</li>
+              <li>Wind gusts matter more on exposed roads.</li>
+              <li>Rain risk means slower rollout and longer gaps.</li>
+              <li>Share route changes before the meet point.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section events-band" id="events">
+        <div class="section-heading">
+          <p class="eyebrow">Updates</p>
+          <h2>Local events with the same energy.</h2>
+        </div>
+
+        <div class="event-list">
+          <article>
+            <time datetime="2026-06-07">7 Jun</time>
+            <div>
+              <h3>Garage night and merch preview</h3>
+              <p>Try sizes, check the hoodie detail, and lock in the next flight tag run.</p>
+            </div>
+            <span>Merch</span>
+          </article>
+
+          <article>
+            <time datetime="2026-06-21">21 Jun</time>
+            <div>
+              <h3>Purple hour photo stop</h3>
+              <p>Short local meet with a planned photo spot and route notes shared before rollout.</p>
+            </div>
+            <span>Meet</span>
+          </article>
+
+          <article>
+            <time datetime="2026-07-05">5 Jul</time>
+            <div>
+              <h3>Summer drop collection day</h3>
+              <p>Pick up pre-orders and grab remaining stock before the next rideout.</p>
+            </div>
+            <span>Drop</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section rideout-section" id="rideouts">
+        <div class="section-heading">
+          <p class="eyebrow">Rideouts</p>
+          <h2>Route info without the group-chat chaos.</h2>
+        </div>
+
+        <div class="rideout-panel">
+          <div class="route-card">
+            <p class="route-label">Next planned rideout</p>
+            <h3>Neon Loop North</h3>
+            <dl>
+              <div>
+                <dt>Meet</dt>
+                <dd>7:30 PM</dd>
+              </div>
+              <div>
+                <dt>Rollout</dt>
+                <dd>8:00 PM</dd>
+              </div>
+              <div>
+                <dt>Distance</dt>
+                <dd>38 mi</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="rideout-rules">
+            <h3>Before rollout</h3>
+            <ul>
+              <li>Full tank before the meet point.</li>
+              <li>Route notes posted here once confirmed.</li>
+              <li>Respect local roads, riders, and residents.</li>
+              <li>Rep the movement, keep the road clean.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="join-section" id="join">
+        <div class="join-copy">
+          <p class="eyebrow">Join the signal</p>
+          <h2>Get the next merch and rideout update.</h2>
+          <p>
+            Add your name and email to receive launch news, local event changes,
+            meet point updates, and merch drop alerts.
+          </p>
+        </div>
+
+        <form class="join-form" id="join-form">
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span>Bike or interest</span>
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+          <button class="button primary" type="submit">Join updates</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <div class="cart-backdrop" data-cart-close hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-hidden="true">
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Merch order</p>
+          <h2 id="cart-title">Cart</h2>
+        </div>
+        <button class="cart-close" type="button" data-cart-close aria-label="Close cart">X</button>
+      </div>
+
+      <div class="cart-tabs" aria-label="Checkout steps">
+        <button class="is-active" type="button" data-cart-step="cart">Cart</button>
+        <button type="button" data-cart-step="checkout">Details</button>
+      </div>
+
+      <section class="cart-step is-active" data-cart-panel="cart" aria-label="Cart items">
+        <div class="cart-empty" id="cart-empty">
+          <h3>No merch added yet.</h3>
+          <p>Pick your hoodie, flight tags, size, and quantity from the merch section.</p>
+        </div>
+
+        <div class="cart-items" id="cart-items"></div>
+
+        <div class="order-summary" aria-label="Order summary">
+          <div>
+            <span>Subtotal</span>
+            <strong id="cart-subtotal">&pound;0.00</strong>
+          </div>
+          <div>
+            <span>Delivery</span>
+            <strong id="cart-shipping">&pound;0.00</strong>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <strong id="cart-total">&pound;0.00</strong>
+          </div>
+        </div>
+
+        <button class="button primary checkout-start" type="button" id="checkout-start">
+          Checkout
+        </button>
+      </section>
+
+      <section class="cart-step" data-cart-panel="checkout" aria-label="Checkout form">
+        <form class="checkout-form" id="checkout-form">
+          <div class="checkout-grid">
+            <label>
+              <span>Full name</span>
+              <input name="customerName" type="text" autocomplete="name" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input name="customerEmail" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              <span>Phone</span>
+              <input name="customerPhone" type="tel" autocomplete="tel" required>
+            </label>
+          </div>
+
+          <fieldset class="delivery-options">
+            <legend>Delivery</legend>
+            <label>
+              <input type="radio" name="delivery" value="collection" data-shipping="0" checked>
+              <span>Collect at meet</span>
+              <strong>Free</strong>
+            </label>
+            <label>
+              <input type="radio" name="delivery" value="uk-delivery" data-shipping="4.99">
+              <span>UK delivery</span>
+              <strong>&pound;4.99</strong>
+            </label>
+          </fieldset>
+
+          <div class="shipping-fields" id="shipping-fields" hidden>
+            <label>
+              <span>Address</span>
+              <input name="address" type="text" autocomplete="address-line1">
+            </label>
+            <label>
+              <span>Town / City</span>
+              <input name="city" type="text" autocomplete="address-level2">
+            </label>
+            <label>
+              <span>Postcode</span>
+              <input name="postcode" type="text" autocomplete="postal-code">
+            </label>
+          </div>
+
+          <label>
+            <span>Payment</span>
+            <select name="payment">
+              <option value="bank-transfer">Bank transfer after confirmation</option>
+              <option value="cash-collection">Cash on collection</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Order notes</span>
+            <textarea name="notes" rows="3"></textarea>
+          </label>
+
+          <div class="order-summary checkout-summary" aria-label="Checkout summary">
+            <div>
+              <span>Subtotal</span>
+              <strong id="checkout-subtotal">&pound;0.00</strong>
+            </div>
+            <div>
+              <span>Delivery</span>
+              <strong id="checkout-shipping">&pound;0.00</strong>
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <strong id="checkout-total">&pound;0.00</strong>
+            </div>
+          </div>
+
+          <button class="button primary" type="submit">Place order</button>
+        </form>
+      </section>
+
+      <section class="order-success" id="order-success" hidden>
+        <img src="assets/brand/thanks-ordering.png" alt="F.I.N.E Riders thanks for ordering graphic">
+        <p class="eyebrow">Order locked</p>
+        <h2>Rep secured.</h2>
+        <p id="order-message"></p>
+        <button class="button primary" type="button" id="order-reset">Start another order</button>
+      </section>
+    </aside>
+
+    <footer class="site-footer">
+      <p>F.I.N.E Riders</p>
+      <p>@ZERO_KIRIGUYA</p>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="site-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
