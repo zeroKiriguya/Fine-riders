@@ -1423,6 +1423,18 @@ body.cart-open .cart-drawer {
   line-height: 1.55;
 }
 
+.order-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.button[aria-disabled="true"] {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .order-success img {
   width: 100%;
   border: 1px solid var(--line);

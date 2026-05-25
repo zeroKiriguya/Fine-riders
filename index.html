@@ -6,7 +6,7 @@
     <title>F.I.N.E Riders</title>
     <meta
       name="description"
-      content="F.I.N.E Riders merch, local rideout updates, and bike group events."
+      content="F.I.N.E Riders merch, ride prep, and Copdock motorbike show route updates."
     >
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -36,7 +36,6 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#shop">Merch</a>
         <a href="#prep">Ride Prep</a>
-        <a href="#events">Events</a>
         <a href="#rideouts">Rideouts</a>
         <a href="#join">Join</a>
       </nav>
@@ -76,7 +75,7 @@
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary" href="#shop">Shop merch</a>
-            <a class="button secondary" href="#events">Next events</a>
+            <a class="button secondary" href="#rideouts">Copdock route</a>
           </div>
         </div>
 
@@ -97,7 +96,7 @@
       </section>
 
       <section class="ticker" aria-label="Latest announcement">
-        <p>Ride together. Rep forever. Summer merch and rideout updates landing soon.</p>
+        <p>Copdock Motorbike Show route update: Sunday 6 September 2026. F.I.N.E meet and leave times TBC.</p>
       </section>
 
       <section class="section brand-story" id="story">
@@ -262,75 +261,39 @@
         </div>
       </section>
 
-      <section class="section events-band" id="events">
-        <div class="section-heading">
-          <p class="eyebrow">Updates</p>
-          <h2>Local events with the same energy.</h2>
-        </div>
-
-        <div class="event-list">
-          <article>
-            <time datetime="2026-06-07">7 Jun</time>
-            <div>
-              <h3>Garage night and merch preview</h3>
-              <p>Try sizes, check the hoodie detail, and lock in the next flight tag run.</p>
-            </div>
-            <span>Merch</span>
-          </article>
-
-          <article>
-            <time datetime="2026-06-21">21 Jun</time>
-            <div>
-              <h3>Purple hour photo stop</h3>
-              <p>Short local meet with a planned photo spot and route notes shared before rollout.</p>
-            </div>
-            <span>Meet</span>
-          </article>
-
-          <article>
-            <time datetime="2026-07-05">5 Jul</time>
-            <div>
-              <h3>Summer drop collection day</h3>
-              <p>Pick up pre-orders and grab remaining stock before the next rideout.</p>
-            </div>
-            <span>Drop</span>
-          </article>
-        </div>
-      </section>
-
       <section class="section rideout-section" id="rideouts">
         <div class="section-heading">
           <p class="eyebrow">Rideouts</p>
-          <h2>Route info without the group-chat chaos.</h2>
+          <h2>Copdock show route info without the group-chat chaos.</h2>
         </div>
 
         <div class="rideout-panel">
           <div class="route-card">
-            <p class="route-label">Next planned rideout</p>
-            <h3>Neon Loop North</h3>
+            <p class="route-label">Next planned destination</p>
+            <h3>Copdock Motorbike Show</h3>
             <dl>
               <div>
+                <dt>Date</dt>
+                <dd>6 Sept 2026</dd>
+              </div>
+              <div>
                 <dt>Meet</dt>
-                <dd>7:30 PM</dd>
+                <dd>TBC</dd>
               </div>
               <div>
-                <dt>Rollout</dt>
-                <dd>8:00 PM</dd>
-              </div>
-              <div>
-                <dt>Distance</dt>
-                <dd>38 mi</dd>
+                <dt>Leave</dt>
+                <dd>TBC</dd>
               </div>
             </dl>
           </div>
 
           <div class="rideout-rules">
-            <h3>Before rollout</h3>
+            <h3>Current plan</h3>
             <ul>
-              <li>Full tank before the meet point.</li>
-              <li>Route notes posted here once confirmed.</li>
-              <li>Respect local roads, riders, and residents.</li>
-              <li>Rep the movement, keep the road clean.</li>
+              <li>Show date is Sunday 6 September 2026; gates open 9am.</li>
+              <li>Destination is Trinity Park, Ipswich, IP3 8UH.</li>
+              <li>F.I.N.E meet point and leave time are still to be confirmed.</li>
+              <li>Route notes will be posted once the group plan is locked in.</li>
             </ul>
           </div>
         </div>
@@ -482,7 +445,7 @@
             </div>
           </div>
 
-          <button class="button primary" type="submit">Place order</button>
+          <button class="button primary" type="submit">Place order and prepare email</button>
         </form>
       </section>
 
@@ -491,13 +454,19 @@
         <p class="eyebrow">Order locked</p>
         <h2>Rep secured.</h2>
         <p id="order-message"></p>
+        <div class="order-actions">
+          <a class="button primary" id="order-send" href="#">Send order email</a>
+          <a class="button secondary" id="order-customer-copy" href="#">Email me a copy</a>
+          <button class="button secondary" type="button" id="order-copy">Copy order details</button>
+        </div>
+        <p class="form-status" id="order-copy-status" role="status" aria-live="polite"></p>
         <button class="button primary" type="button" id="order-reset">Start another order</button>
       </section>
     </aside>
 
     <footer class="site-footer">
       <p>F.I.N.E Riders</p>
-      <p>@F.I.N.E.riders</p>
+      <p>@ZERO_KIRIGUYA</p>
       <a href="#top">Back to top</a>
     </footer>
 

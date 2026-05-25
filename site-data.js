@@ -1,4 +1,4 @@
-window.FINE_SITE_DATA_KEY = "fine-riders-site-data";
+window.FINE_SITE_DATA_KEY = "fine-riders-public-data-v2";
 
 window.FINE_DEFAULT_DATA = {
   hero: {
@@ -9,7 +9,7 @@ window.FINE_DEFAULT_DATA = {
     taglineAccent: "Rep forever.",
     lede: "Fucked Inside Not Empty. A rider movement for the ones who turn up, stand out, and carry the purple mark.",
   },
-  announcement: "Ride together. Rep forever. Summer merch and rideout updates landing soon.",
+  announcement: "Copdock Motorbike Show route update: Sunday 6 September 2026. F.I.N.E meet and leave times TBC.",
   story: {
     eyebrow: "About the brand",
     title: "Fucked Inside Not Empty.",
@@ -40,43 +40,21 @@ window.FINE_DEFAULT_DATA = {
       },
     ],
   },
-  events: [
-    {
-      date: "2026-06-07",
-      displayDate: "7 Jun",
-      title: "Garage night and merch preview",
-      description: "Try sizes, check the hoodie detail, and lock in the next flight tag run.",
-      label: "Merch",
-    },
-    {
-      date: "2026-06-21",
-      displayDate: "21 Jun",
-      title: "Purple hour photo stop",
-      description: "Short local meet with a planned photo spot and route notes shared before rollout.",
-      label: "Meet",
-    },
-    {
-      date: "2026-07-05",
-      displayDate: "5 Jul",
-      title: "Summer drop collection day",
-      description: "Pick up pre-orders and grab remaining stock before the next rideout.",
-      label: "Drop",
-    },
-  ],
+  events: [],
   rideout: {
     eyebrow: "Rideouts",
-    heading: "Route info without the group-chat chaos.",
-    routeLabel: "Next planned rideout",
-    name: "Neon Loop North",
-    meet: "7:30 PM",
-    rollout: "8:00 PM",
-    distance: "38 mi",
-    rulesTitle: "Before rollout",
+    heading: "Copdock show route info without the group-chat chaos.",
+    routeLabel: "Next planned destination",
+    name: "Copdock Motorbike Show",
+    meet: "6 Sept 2026",
+    rollout: "TBC",
+    distance: "TBC",
+    rulesTitle: "Current plan",
     rules: [
-      "Full tank before the meet point.",
-      "Route notes posted here once confirmed.",
-      "Respect local roads, riders, and residents.",
-      "Rep the movement, keep the road clean.",
+      "Show date is Sunday 6 September 2026; gates open 9am.",
+      "Destination is Trinity Park, Ipswich, IP3 8UH.",
+      "F.I.N.E meet point and leave time are still to be confirmed.",
+      "Route notes will be posted once the group plan is locked in.",
     ],
   },
   join: {

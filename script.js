@@ -1,4 +1,4 @@
-const dataKey = window.FINE_SITE_DATA_KEY || "fine-riders-site-data";
+const dataKey = window.FINE_SITE_DATA_KEY || "fine-riders-public-data-v2";
 const defaultData = window.FINE_DEFAULT_DATA || {
   hero: {
     eyebrow: "Home of the Ruroc Army",
@@ -8,7 +8,7 @@ const defaultData = window.FINE_DEFAULT_DATA || {
     taglineAccent: "Rep forever.",
     lede: "Fucked Inside Not Empty. A rider movement for the ones who turn up, stand out, and carry the purple mark.",
   },
-  announcement: "Ride together. Rep forever. Summer merch and rideout updates landing soon.",
+  announcement: "Copdock Motorbike Show route update: Sunday 6 September 2026. F.I.N.E meet and leave times TBC.",
   story: {
     eyebrow: "About the brand",
     title: "Fucked Inside Not Empty.",
@@ -36,43 +36,21 @@ const defaultData = window.FINE_DEFAULT_DATA || {
       },
     ],
   },
-  events: [
-    {
-      date: "2026-06-07",
-      displayDate: "7 Jun",
-      title: "Garage night and merch preview",
-      description: "Try sizes, check the hoodie detail, and lock in the next flight tag run.",
-      label: "Merch",
-    },
-    {
-      date: "2026-06-21",
-      displayDate: "21 Jun",
-      title: "Purple hour photo stop",
-      description: "Short local meet with a planned photo spot and route notes shared before rollout.",
-      label: "Meet",
-    },
-    {
-      date: "2026-07-05",
-      displayDate: "5 Jul",
-      title: "Summer drop collection day",
-      description: "Pick up pre-orders and grab remaining stock before the next rideout.",
-      label: "Drop",
-    },
-  ],
+  events: [],
   rideout: {
     eyebrow: "Rideouts",
-    heading: "Route info without the group-chat chaos.",
-    routeLabel: "Next planned rideout",
-    name: "Neon Loop North",
-    meet: "7:30 PM",
-    rollout: "8:00 PM",
-    distance: "38 mi",
-    rulesTitle: "Before rollout",
+    heading: "Copdock show route info without the group-chat chaos.",
+    routeLabel: "Next planned destination",
+    name: "Copdock Motorbike Show",
+    meet: "6 Sept 2026",
+    rollout: "TBC",
+    distance: "TBC",
+    rulesTitle: "Current plan",
     rules: [
-      "Full tank before the meet point.",
-      "Route notes posted here once confirmed.",
-      "Respect local roads, riders, and residents.",
-      "Rep the movement, keep the road clean.",
+      "Show date is Sunday 6 September 2026; gates open 9am.",
+      "Destination is Trinity Park, Ipswich, IP3 8UH.",
+      "F.I.N.E meet point and leave time are still to be confirmed.",
+      "Route notes will be posted once the group plan is locked in.",
     ],
   },
   join: {
@@ -120,11 +98,7 @@ function deepMerge(base, override) {
 }
 
 function loadSiteData() {
-  try {
-    return normalizeSiteData(deepMerge(clone(defaultData), JSON.parse(localStorage.getItem(dataKey))));
-  } catch {
-    return normalizeSiteData(clone(defaultData));
-  }
+  return normalizeSiteData(clone(defaultData));
 }
 
 function normalizeSiteData(data) {
@@ -583,6 +557,10 @@ const checkoutForm = document.querySelector("#checkout-form");
 const shippingFields = document.querySelector("#shipping-fields");
 const orderSuccess = document.querySelector("#order-success");
 const orderMessage = document.querySelector("#order-message");
+const orderSend = document.querySelector("#order-send");
+const orderCustomerCopy = document.querySelector("#order-customer-copy");
+const orderCopy = document.querySelector("#order-copy");
+const orderCopyStatus = document.querySelector("#order-copy-status");
 const orderReset = document.querySelector("#order-reset");
 const stepButtons = document.querySelectorAll("[data-cart-step]");
 const stepPanels = document.querySelectorAll("[data-cart-panel]");
@@ -861,6 +839,134 @@ function updateCartItem(index, action) {
   }
 }
 
+function getDeliveryLabel(value) {
+  return value === "uk-delivery" ? "UK delivery" : "Collect at meet";
+}
+
+function getPaymentLabel(value) {
+  return value.replaceAll("-", " ");
+}
+
+function buildOrderEmailBody(order) {
+  const itemLines = order.items.map(
+    (item) =>
+      `- ${item.quantity} x ${item.name} (${item.colour} / ${item.size}) at ${formatMoney(item.price)} each = ${formatMoney(item.price * item.quantity)}`
+  );
+  const deliveryLines =
+    order.delivery === "uk-delivery"
+      ? [
+          `Address: ${order.address}`,
+          `Town / City: ${order.city}`,
+          `Postcode: ${order.postcode}`,
+        ]
+      : ["Collection: collect at meet"];
+
+  return [
+    `Order ${order.id}`,
+    `Placed: ${new Date(order.createdAt).toLocaleString("en-GB")}`,
+    "",
+    "Customer",
+    `Name: ${order.customerName}`,
+    `Email: ${order.customerEmail}`,
+    `Phone: ${order.customerPhone}`,
+    "",
+    "Items",
+    ...itemLines,
+    "",
+    "Delivery",
+    `Method: ${getDeliveryLabel(order.delivery)}`,
+    ...deliveryLines,
+    "",
+    "Payment",
+    `Method: ${getPaymentLabel(order.payment)}`,
+    "",
+    "Totals",
+    `Subtotal: ${formatMoney(order.subtotal)}`,
+    `Delivery: ${formatMoney(order.shipping)}`,
+    `Total: ${formatMoney(order.total)}`,
+    "",
+    "Notes",
+    order.notes || "No notes.",
+  ].join("\n");
+}
+
+function buildCustomerCopyBody(order) {
+  return [
+    "Thanks for ordering from F.I.N.E Riders.",
+    "",
+    "Keep this as your order copy. Your order is not fully with the group until the order email has been sent.",
+    "",
+    buildOrderEmailBody(order),
+  ].join("\n");
+}
+
+function buildMailLink({ to = "", cc = "", subject, body }) {
+  const params = new URLSearchParams({
+    subject,
+    body,
+  });
+
+  if (cc) {
+    params.set("cc", cc);
+  }
+
+  return `mailto:${to.trim()}?${params.toString()}`;
+}
+
+function setOrderLinkState(link, href, isEnabled) {
+  if (!link) {
+    return;
+  }
+
+  if (isEnabled) {
+    link.href = href;
+    link.removeAttribute("aria-disabled");
+    return;
+  }
+
+  link.removeAttribute("href");
+  link.setAttribute("aria-disabled", "true");
+}
+
+function updateOrderActions(order) {
+  const orderEmail = String(siteData.orders?.email || "").trim();
+  const orderSubject = `${siteData.orders?.subjectPrefix || "F.I.N.E Riders merch order"} ${order.id}`;
+  const orderBody = buildOrderEmailBody(order);
+  const customerSubject = `${siteData.orders?.confirmationSubject || "Your F.I.N.E Riders order"} ${order.id}`;
+  const customerBody = buildCustomerCopyBody(order);
+
+  setOrderLinkState(
+    orderSend,
+    buildMailLink({
+      to: orderEmail,
+      cc: order.customerEmail,
+      subject: orderSubject,
+      body: orderBody,
+    }),
+    Boolean(orderEmail)
+  );
+
+  setOrderLinkState(
+    orderCustomerCopy,
+    buildMailLink({
+      to: order.customerEmail,
+      subject: customerSubject,
+      body: customerBody,
+    }),
+    Boolean(order.customerEmail)
+  );
+
+  if (orderCopy) {
+    orderCopy.dataset.orderDetails = orderBody;
+  }
+
+  if (orderCopyStatus) {
+    orderCopyStatus.textContent = orderEmail
+      ? "Tap send order email so the group receives it. Your email is copied in."
+      : "Order inbox is not set yet. Add it in the Kunarmi editor, then publish site data.";
+  }
+}
+
 function placeOrder(form) {
   if (cart.length === 0) {
     showCartStep("cart");
@@ -875,16 +981,20 @@ function placeOrder(form) {
     customerEmail: String(formData.get("customerEmail") || "").trim(),
     customerPhone: String(formData.get("customerPhone") || "").trim(),
     delivery: String(formData.get("delivery") || "collection"),
+    address: String(formData.get("address") || "").trim(),
+    city: String(formData.get("city") || "").trim(),
+    postcode: String(formData.get("postcode") || "").trim(),
     payment: String(formData.get("payment") || "bank-transfer"),
     notes: String(formData.get("notes") || "").trim(),
-    items: cart,
+    items: cart.map((item) => ({ ...item })),
     subtotal: getSubtotal(),
     shipping: getShipping(),
     total: getTotal(),
   };
 
   localStorage.setItem(ORDER_KEY, JSON.stringify(order));
-  orderMessage.textContent = `${order.id} is ready for ${order.customerName}. Total ${formatMoney(order.total)}. Payment is set to ${order.payment.replace("-", " ")}.`;
+  orderMessage.textContent = `${order.id} is ready for ${order.customerName}. Total ${formatMoney(order.total)}. Payment is set to ${getPaymentLabel(order.payment)}.`;
+  updateOrderActions(order);
 
   cart = [];
   form.reset();
@@ -1090,8 +1200,34 @@ checkoutForm.addEventListener("submit", (event) => {
   placeOrder(checkoutForm);
 });
 
+[orderSend, orderCustomerCopy].forEach((link) => {
+  link?.addEventListener("click", (event) => {
+    if (link.getAttribute("aria-disabled") === "true") {
+      event.preventDefault();
+    }
+  });
+});
+
+orderCopy?.addEventListener("click", async () => {
+  const details = orderCopy.dataset.orderDetails || "";
+
+  if (!details) {
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(details);
+    orderCopyStatus.textContent = "Order details copied.";
+  } catch {
+    orderCopyStatus.textContent = details;
+  }
+});
+
 orderReset.addEventListener("click", () => {
   checkoutForm.reset();
+  if (orderCopyStatus) {
+    orderCopyStatus.textContent = "";
+  }
   updateShippingFields();
   showCartStep("cart");
 });
