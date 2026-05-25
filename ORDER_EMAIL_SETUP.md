@@ -15,7 +15,25 @@ GitHub Pages cannot send emails by itself. Use this small Google Apps Script end
 9. Authorise the script when Google asks.
 10. Copy the Web app URL ending in `/exec`.
 
-## 2. Connect the website
+## 2. Test the endpoint
+
+Open your Web app URL with `?test=1` on the end:
+
+```text
+https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?test=1
+```
+
+You should receive a test email at `ORDER_INBOX`.
+
+If you do not receive that test email:
+
+- Check `ORDER_INBOX` is your real email address.
+- Click **Deploy** > **Manage deployments** > edit the deployment > choose **New version** > **Deploy**.
+- Make sure **Execute as** is **Me**.
+- Make sure **Who has access** is **Anyone**.
+- In Apps Script, open **Executions** to see the error message.
+
+## 3. Connect the website
 
 In `site-data.js`, update:
 

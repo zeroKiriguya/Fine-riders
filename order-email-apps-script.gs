@@ -4,6 +4,22 @@ const SUBJECT_PREFIX = "F.I.N.E Riders merch order";
 const CUSTOMER_SUBJECT = "Your F.I.N.E Riders order";
 
 function doGet() {
+  const params = arguments[0] && arguments[0].parameter ? arguments[0].parameter : {};
+
+  if (params.test === "1") {
+    MailApp.sendEmail({
+      to: ORDER_INBOX,
+      subject: `${BRAND_NAME} order endpoint test`,
+      body: `Test email sent at ${new Date().toLocaleString("en-GB")}. If you received this, the endpoint can send mail.`,
+      name: BRAND_NAME,
+    });
+
+    return jsonResponse({
+      ok: true,
+      message: "Test email sent to ORDER_INBOX.",
+    });
+  }
+
   return jsonResponse({
     ok: true,
     message: "F.I.N.E Riders order endpoint is live.",
@@ -12,7 +28,11 @@ function doGet() {
 
 function doPost(event) {
   try {
-    const payload = JSON.parse(event.postData.contents || "{}");
+    const rawPayload =
+      (event.parameter && event.parameter.payload) ||
+      (event.postData && event.postData.contents) ||
+      "{}";
+    const payload = JSON.parse(rawPayload);
     const order = payload.order || payload;
     validateOrder(order);
 

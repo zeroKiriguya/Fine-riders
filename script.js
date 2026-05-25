@@ -968,7 +968,7 @@ function updateOrderActions(order, deliveryResult = { mode: "manual" }) {
 
   if (orderCopyStatus) {
     if (deliveryResult.mode === "automatic" && deliveryResult.ok) {
-      orderCopyStatus.textContent = "Order email has been submitted automatically. The buttons below are backups.";
+      orderCopyStatus.textContent = "Order details were submitted to the email service. If nothing arrives, use the backup button below.";
       return;
     }
 
@@ -991,17 +991,37 @@ async function sendOrderAutomatically(order) {
   }
 
   try {
-    await fetch(endpoint, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: JSON.stringify({
+    const iframeName = `fine-order-submit-${Date.now()}`;
+    const iframe = document.createElement("iframe");
+    iframe.name = iframeName;
+    iframe.hidden = true;
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = endpoint;
+    form.target = iframeName;
+    form.hidden = true;
+
+    const payload = document.createElement("input");
+    payload.type = "hidden";
+    payload.name = "payload";
+    payload.value = JSON.stringify({
         order,
         source: "fine-riders-site",
         sentAt: new Date().toISOString(),
-      }),
+      });
+
+    form.append(payload);
+    document.body.append(iframe, form);
+    form.submit();
+
+    window.setTimeout(() => {
+      form.remove();
+      iframe.remove();
+    }, 10000);
+
+    await new Promise((resolve) => {
+      window.setTimeout(resolve, 2200);
     });
 
     return { mode: "automatic", ok: true };
